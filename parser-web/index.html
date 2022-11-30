@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ast parser</title>
+    <style>
+        html,body,pre{margin: 0;padding: 0;}
+        .page{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        h3{
+            height: 20px;
+            margin: 18px 0;
+        }
+        .item{
+            height: calc(100vh - 56px);
+            display: flex;
+            align-items: center;
+        }
+        .input,.output-wrapper{
+            width: 300px;
+            height: 100%;
+            border: 1px solid;
+            box-sizing: border-box;
+        }
+        .output-wrapper{
+            width: 500px;
+            overflow-y: auto;
+        }
+        .output{
+            display: block;
+            height: 100%;
+        }
+        .parse{
+            margin: 20px;
+            height: 40px;
+            outline: none;
+            background: none;
+            border: 1px solid;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h3>Literal</h3>
+        <div class="item">
+            <div contenteditable class="input">;{42;{'hello';}}</div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>Binary Expression</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                2 + 2 * 3;
+                (2 + 2) * 3;
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>Assignment Expression</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                x = y +=  2 + 5;
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>Variable Statement</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                var x = y += 2 + 5,z,a = 1;
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>If Statement</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                if(x > 3){
+                    x += 3;
+                }else{
+                    x -= 3;
+                }
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>equality && Logical</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                x + 5 > 10 === true;
+                z == 1 || x >= 5 && y < 3;
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>Unary Expression</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                !!x + -1;
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>Iteration Statements</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                while(x > 10){
+                    x-=1;
+                }
+                for(let i = 0,j = 1;i < 10;i+=1){
+                }
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>Function Declaration</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                function a(x,y){
+                    return 1;
+                }
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>Member Expression</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                x.y;
+                x[y]=1;
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <h3>Call Expression</h3>
+        <div class="item">
+            <div contenteditable class="input">
+                foo(1);
+                foo(1)(2);
+            </div>
+            <button class="parse">parse</button>
+            <div class="output-wrapper">
+                <pre class="output"></pre>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
